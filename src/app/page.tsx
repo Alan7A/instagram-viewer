@@ -1,15 +1,13 @@
 import Search from "@/components/Search";
 import Title from "@/components/Title";
-import Username from "@/components/Username";
+import UsernameList from "@/components/UsernameList";
 
 export default function Home() {
   return (
-    <main className="flex flex-col gap-4">
+    <main className="flex flex-col gap-10 min-h-screen items-center">
       <Title title="Recent usernames" />
       <Search />
-      <div className="flex flex-wrap">
-        <Username username="alandelgado07" url="/username1" />
-      </div>
+      <UsernameList />
     </main>
   );
 }

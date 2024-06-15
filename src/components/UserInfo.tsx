@@ -29,7 +29,7 @@ const UserInfo = async (props: Props) => {
   const { follower_count, following_count, biography } = user;
   const { url, url_signature } = hd_profile_pic_versions[0];
   const image = getImageUrl({ url, url_signature });
-  console.log({ image });
+
   return (
     <div className="flex gap-4">
       <Avatar className="w-[80px] h-[80px]">

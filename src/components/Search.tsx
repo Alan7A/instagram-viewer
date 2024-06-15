@@ -13,6 +13,14 @@ const Search = () => {
 
   const router = useRouter();
 
+  const saveUsernameInLocalStorage = (username: string) => {
+    const timestamp = new Date().getTime();
+    const data = { username, timestamp };
+    const usernames = JSON.parse(localStorage.getItem("usernames") || "[]");
+    usernames.push(data);
+    localStorage.setItem("usernames", JSON.stringify(usernames));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -21,7 +29,11 @@ const Search = () => {
       setError("Username is required");
     }
 
-    router.push(`/${username}`);
+    const trimmedUsername = username.trim();
+
+    saveUsernameInLocalStorage(trimmedUsername);
+
+    router.push(`/${trimmedUsername}`);
   };
 
   return (
@@ -31,7 +43,6 @@ const Search = () => {
           placeholder="Username"
           value={username}
           onChange={e => setUSername(e.target.value)}
-          className="text-black"
         />
         <Button type="submit" size="icon" variant="secondary">
           <SearchIcon />
@@ -43,3 +54,4 @@ const Search = () => {
 };
 
 export default Search;
+// hsl(221, 89%, 72% / 0.8)

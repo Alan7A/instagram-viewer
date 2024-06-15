@@ -1,3 +1,8 @@
+export interface Username {
+  username: string;
+  timestamp: number;
+}
+
 export interface GetUserResponse {
   result: Result;
 }
