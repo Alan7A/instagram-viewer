@@ -34,7 +34,7 @@ export function getRelativeTimeString(dateInSeconds: number) {
   }
 }
 
-interface GetImageUrlOptions {
+interface GetMediaUrlOptions {
   url: string;
   url_signature: {
     signature: string;
@@ -42,10 +42,21 @@ interface GetImageUrlOptions {
   };
 }
 
-export function getImageUrl(options: GetImageUrlOptions) {
-  const { url, url_signature: urlSignature } = options;
-  const { signature, expires } = urlSignature;
+export function getImageUrl(options: GetMediaUrlOptions) {
+  const { url, url_signature } = options;
+  const { signature, expires } = url_signature;
 
   const encodedUri = encodeURIComponent(url);
   return `https://media.anonyig.com/get?uri=${encodedUri}&__sig=${signature}&__expires=${expires}`;
+}
+
+export function getVideoUrl(options: GetMediaUrlOptions | null) {
+  if (!options) return "";
+  const { url, url_signature } = options;
+  const { signature, expires } = url_signature;
+  const filename = url.split("?")[0].split("/").pop();
+  const referer = "https%3A%2F%2Fwww.instagram.com%2F";
+
+  const encodedUri = encodeURIComponent(url);
+  return `https://media.anonyig.com/get?uri=${encodedUri}&filename=${filename}&__sig=${signature}&__expires=${expires}&referer=${referer}`;
 }
