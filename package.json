@@ -5,22 +5,37 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next dev",
+    "lint": "next lint",
+    "check-types": "tsc",
+    "format": "yarn prettier --write",
+    "prepare": "husky install",
+    "prettier": "prettier --ignore-path .gitignore \"**/*.+(js|jsx|ts|tsx|json|css|scss|html)\"",
+    "clean": "rm -rf node_modules && rm -rf packages/**/node_modules && rm -rf apps/**/node_modules"
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.395.0",
+    "next": "14.2.4",
+    "next-pwa": "^5.6.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.4"
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
     "eslint": "^8",
-    "eslint-config-next": "14.2.4"
+    "eslint-config-next": "14.2.4",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "postcss": "^8",
+    "prettier": "^3.3.2",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
