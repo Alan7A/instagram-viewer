@@ -20,7 +20,11 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body
+        className={`${inter.className} bg-primary text-primary-foreground pt-4 px-4`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
