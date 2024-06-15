@@ -4,9 +4,12 @@ import React, { useState } from "react";
 import Username from "./Username";
 
 const UsernameList = () => {
-  const usernamesLocalStorage: UsernameType[] = JSON.parse(
-    localStorage.getItem("usernames") || "[]"
-  ).sort((a: UsernameType, b: UsernameType) => b.timestamp - a.timestamp);
+  const usernamesLocalStorage: UsernameType[] =
+    typeof window === "undefined"
+      ? []
+      : JSON.parse(localStorage.getItem("usernames") || "[]").sort(
+          (a: UsernameType, b: UsernameType) => b.timestamp - a.timestamp
+        );
 
   const [usernames, setUsernames] = useState(usernamesLocalStorage);
 
