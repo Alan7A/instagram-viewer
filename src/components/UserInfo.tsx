@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { GetUserResponse } from "../types";
+import { GetUserResponse } from "../types/User.types";
+import { getImageUrl } from "@/lib/utils";
 
 interface Props {
   username: string;
@@ -12,7 +13,7 @@ async function getUserInfo(username: string) {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error("Failed to fetch user info");
   }
 
   const response: GetUserResponse = await res.json();
@@ -24,16 +25,18 @@ const UserInfo = async (props: Props) => {
   const { username } = props;
 
   const user = await getUserInfo(username);
-  const { profile_pic_url, full_name, media_count } = user;
+  const { full_name, media_count, hd_profile_pic_versions } = user;
   const { follower_count, following_count, biography } = user;
-
+  const { url, url_signature } = hd_profile_pic_versions[0];
+  const image = getImageUrl({ url, url_signature });
+  console.log({ image });
   return (
     <div className="flex gap-4">
       <Avatar className="w-[80px] h-[80px]">
-        <AvatarImage src={profile_pic_url} alt="profile pic" />
+        <AvatarImage src={image} alt="profile pic" />
         <AvatarFallback className="text-black">{full_name[0]}</AvatarFallback>
       </Avatar>
-      <div className="flex-1">
+      <div className="flex-1 flex flex-col gap-2">
         <div className="flex gap-2">
           <div className="flex gap-1">
             <span className="font-bold">{media_count}</span>Posts
@@ -45,8 +48,9 @@ const UserInfo = async (props: Props) => {
             <span className="font-bold">{following_count}</span>Following
           </div>
         </div>
-
-        <p className="mt-4">{biography}</p>
+        {/* TODO: Poner de un color diferente el nombre */}
+        <p>{full_name}</p>
+        <p>{biography}</p>
       </div>
     </div>
   );

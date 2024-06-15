@@ -33,7 +33,7 @@ const Search = () => {
           onChange={e => setUSername(e.target.value)}
           className="text-black"
         />
-        <Button type="submit" size="icon" variant="default">
+        <Button type="submit" size="icon" variant="secondary">
           <SearchIcon />
         </Button>
       </form>
