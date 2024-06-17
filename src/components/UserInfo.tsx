@@ -9,7 +9,8 @@ interface Props {
 
 async function getUserInfo(username: string) {
   const res = await fetch(
-    `https://anonyig.com/api/ig/userInfoByUsername/${username}`
+    `https://anonyig.com/api/ig/userInfoByUsername/${username}`,
+    { next: { revalidate: 259200 } } // 3 days
   );
 
   if (!res.ok) {
@@ -49,7 +50,7 @@ const UserInfo = async (props: Props) => {
           </div>
         </div>
         {/* TODO: Poner de un color diferente el nombre */}
-        <p>{full_name}</p>
+        <p className="text-lg">{full_name}</p>
         <p>{biography}</p>
       </div>
     </div>

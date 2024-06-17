@@ -8,7 +8,8 @@ interface Props {
 
 async function getUserStories(username: string) {
   const res = await fetch(
-    `https://anonyig.com/api/ig/story?url=https%3A%2F%2Fwww.instagram.com%2Fstories%2F${username}%2F`
+    `https://anonyig.com/api/ig/story?url=https%3A%2F%2Fwww.instagram.com%2Fstories%2F${username}%2F`,
+    { cache: "no-store" }
   );
 
   if (!res.ok) {
