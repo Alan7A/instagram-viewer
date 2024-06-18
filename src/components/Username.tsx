@@ -35,7 +35,12 @@ const Username = (props: Props) => {
   return (
     <div className="flex justify-between bg-slate-700 items-center rounded-xl hover:bg-slate-600 duration-200 self-baseline">
       <Link className="text-sm pl-4 py-2 pr-1" href={username} passHref>
-        <p onClick={() => updateUsernameTimestamp(username)}>{username}</p>
+        <p
+          className="text-lg"
+          onClick={() => updateUsernameTimestamp(username)}
+        >
+          {username}
+        </p>
       </Link>
       <button
         onClick={() => removeUsernameFromLocalStorage(username)}

@@ -31,7 +31,7 @@ const Stories = async (props: Props) => {
   }
 
   return (
-    <div className="flex flex-col gap-4 items-center">
+    <div className="flex flex-col gap-8 items-center">
       {stories.map((story, i) => (
         <Story key={i} story={story} />
       ))}

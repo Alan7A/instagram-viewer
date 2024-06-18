@@ -3,7 +3,7 @@
   "short_name": "InstaViewer",
   "theme_color": "#7aa2f7",
   "background_color": "#1a1b26",
-  "display": "fullscreen",
+  "display": "standalone",
   "scope": "/",
   "start_url": "/",
   "icons": [

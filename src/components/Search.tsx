@@ -43,6 +43,7 @@ const Search = () => {
           placeholder="Username"
           value={username}
           onChange={e => setUSername(e.target.value)}
+          className="text-lg"
         />
         <Button type="submit" size="icon" variant="secondary">
           <SearchIcon />
@@ -54,4 +55,3 @@ const Search = () => {
 };
 
 export default Search;
-// hsl(221, 89%, 72% / 0.8)

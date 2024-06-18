@@ -39,10 +39,10 @@ const Story = (props: Props) => {
         </AspectRatio>
         {isVideo && <PlayIcon />}
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <p>{relativeTime}</p>
         <Button size="icon" variant="ghost">
-          <Download />
+          <Download color="#bb9af7" />
         </Button>
       </div>
       <ImageDialog

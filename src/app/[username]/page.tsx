@@ -2,6 +2,7 @@ import Stories from "@/components/Stories";
 import Title from "@/components/Title";
 import UserInfo from "@/components/UserInfo";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -16,8 +17,12 @@ export default async function UserPage(props: Props) {
 
   return (
     <main className="flex flex-col gap-4">
-      <Link href="/">Volver</Link>
-      <Title title={username} />
+      <div className="flex gap-4 items-center">
+        <Link href="/">
+          <ArrowLeft color="#bb9af7" />
+        </Link>
+        <Title title={username} />
+      </div>
 
       <Suspense fallback={<div>Loading user info...</div>}>
         <UserInfo username={username} />

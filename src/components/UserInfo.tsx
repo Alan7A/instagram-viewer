@@ -22,6 +22,10 @@ async function getUserInfo(username: string) {
   return response.result.user;
 }
 
+const formatNumber = (num: number) => {
+  return new Intl.NumberFormat().format(num);
+};
+
 const UserInfo = async (props: Props) => {
   const { username } = props;
 
@@ -38,15 +42,17 @@ const UserInfo = async (props: Props) => {
         <AvatarFallback className="text-black">{full_name[0]}</AvatarFallback>
       </Avatar>
       <div className="flex-1 flex flex-col gap-2">
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <div className="flex gap-1">
-            <span className="font-bold">{media_count}</span>Posts
+            <span className="font-bold">{formatNumber(media_count)}</span>Posts
           </div>
           <div className="flex gap-1">
-            <span className="font-bold">{follower_count}</span>Followers
+            <span className="font-bold">{formatNumber(follower_count)}</span>
+            Followers
           </div>
           <div className="flex gap-1">
-            <span className="font-bold">{following_count}</span>Following
+            <span className="font-bold">{formatNumber(following_count)}</span>
+            Following
           </div>
         </div>
         {/* TODO: Poner de un color diferente el nombre */}
