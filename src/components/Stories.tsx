@@ -13,7 +13,7 @@ async function getUserStories(username: string) {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch user stories");
+    throw new Error("Failed to fetch user stories. " + res.statusText);
   }
 
   const response: GetStoriesResponse = await res.json();
@@ -31,7 +31,7 @@ const Stories = async (props: Props) => {
   }
 
   return (
-    <div className="flex flex-col gap-8 items-center">
+    <div className="flex flex-col gap-8 items-center sm:flex-row sm:flex-wrap sm:w-full">
       {stories.map((story, i) => (
         <Story key={i} story={story} />
       ))}

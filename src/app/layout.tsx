@@ -21,7 +21,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body
-        className={`${inter.className} bg-primary text-primary-foreground pt-12 px-4`}
+        className={`${inter.className} bg-primary text-primary-foreground pt-12 px-4 container`}
       >
         {children}
       </body>
