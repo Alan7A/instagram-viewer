@@ -1,4 +1,5 @@
-import React, { Dispatch } from "react";
+"use client";
+import React, { Dispatch, useRef } from "react";
 import { Dialog, DialogContent } from "./ui/dialog";
 import Image from "next/image";
 import { AspectRatio } from "./ui/aspect-ratio";
@@ -14,12 +15,24 @@ interface Props {
 
 const ImageDialog = (props: Props) => {
   const { isOpen, setIsOpen, isVideo, src } = props;
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   return (
     <Dialog open={isOpen} modal onOpenChange={setIsOpen}>
       <DialogContent className="pt-12 max-w-[80%] sm:max-w-lg">
         <AspectRatio ratio={9 / 16}>
           {isVideo ? (
-            <video controls className="w-full">
+            <video
+              controls
+              className="w-full"
+              autoPlay
+              ref={videoRef}
+              onLoadedMetadata={() => {
+                if (videoRef.current) {
+                  videoRef.current.volume = 0.2;
+                }
+              }}
+            >
               <source src={src} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
