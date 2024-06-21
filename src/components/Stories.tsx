@@ -26,8 +26,12 @@ const Stories = async (props: Props) => {
 
   const stories = await getUserStories(username);
 
-  if (!stories) {
-    return <div>No stories found</div>;
+  if (!stories || stories.length === 0) {
+    return (
+      <p className="text-center text-gray-400 text-lg mt-12">
+        No stories found
+      </p>
+    );
   }
 
   return (

@@ -5,8 +5,10 @@ import { AspectRatio } from "./ui/aspect-ratio";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Download, Play } from "lucide-react";
-import { getImageUrl, getRelativeTimeString, getVideoUrl } from "@/lib/utils";
+import { getRelativeTimeString } from "@/lib/utils";
+import { getImageUrl, getVideoUrl, toBase64 } from "@/lib/utils";
 import ImageDialog from "./ImageDialog";
+import { imagePlaceholder } from "./Placeholders";
 
 interface Props {
   story: StoryType;
@@ -34,7 +36,8 @@ const Story = (props: Props) => {
             fill={true}
             alt="Story"
             onClick={() => setIsOpen(true)}
-            className="rounded-md object-cover"
+            className="rounded-md object-cover animate-in fade-in duration-1000"
+            placeholder={`data:image/svg+xml;base64,${toBase64(imagePlaceholder(700, 475))}`}
           />
         </AspectRatio>
         {isVideo && <PlayIcon />}

@@ -57,8 +57,16 @@ const Highlights = async (props: Props) => {
     stories = await getHighlightStories(props.highlight);
   }
 
+  if (!highlights || highlights.length === 0) {
+    return (
+      <p className="text-center text-gray-400 text-lg mt-12">
+        No highlights found
+      </p>
+    );
+  }
+
   return (
-    <div className="flex flex-col gap-4 mt-4">
+    <div className="flex flex-col gap-4 mt-6">
       <div className="flex gap-8">
         {highlights.map(highlight => {
           const { id, title, cover_media } = highlight;
@@ -71,16 +79,16 @@ const Highlights = async (props: Props) => {
             <Link
               key={id}
               href={`/${username}?userId=${userId}&highlight=${id}`}
-              className="flex flex-col gap-1"
+              className="flex flex-col gap-1 items-center"
             >
               <Avatar
-                className={`w-[50px] h-[50px] ${isSelected ? "ring ring-[#bb9af7]" : ""}`}
+                className={`w-[50px] h-[50px] ${isSelected ? "ring-4 ring-secondary" : ""}`}
               >
                 <AvatarImage src={image} alt="profile pic" />
                 <AvatarFallback className="text-black">{title}</AvatarFallback>
               </Avatar>
-              <span className="text-center">
-                {title.length > 10 ? `${title.slice(0, 10)}...` : title}
+              <span className="text-center" title={title}>
+                {title.length > 10 ? `${title.slice(0, 5)}...` : title}
               </span>
             </Link>
           );

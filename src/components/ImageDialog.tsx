@@ -2,6 +2,8 @@ import React, { Dispatch } from "react";
 import { Dialog, DialogContent } from "./ui/dialog";
 import Image from "next/image";
 import { AspectRatio } from "./ui/aspect-ratio";
+import { imagePlaceholder } from "./Placeholders";
+import { toBase64 } from "@/lib/utils";
 
 interface Props {
   isOpen: boolean;
@@ -27,6 +29,7 @@ const ImageDialog = (props: Props) => {
               alt="Story"
               className="w-full object-cover"
               fill={true}
+              placeholder={`data:image/svg+xml;base64,${toBase64(imagePlaceholder(700, 475))}`}
             />
           )}
         </AspectRatio>

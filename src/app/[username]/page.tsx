@@ -1,4 +1,8 @@
 import Highlights from "@/components/Highlights";
+import {
+  StoriesPlaceholder,
+  UserInfoPlaceholder
+} from "@/components/Placeholders";
 import Stories from "@/components/Stories";
 import Title from "@/components/Title";
 import UserInfo from "@/components/UserInfo";
@@ -30,7 +34,7 @@ export default async function UserPage(props: Props) {
         <Title title={username} />
       </div>
 
-      <Suspense fallback={<div>Loading user info...</div>}>
+      <Suspense fallback={<UserInfoPlaceholder />}>
         <UserInfo username={username} userId={userId} />
       </Suspense>
 
@@ -40,12 +44,12 @@ export default async function UserPage(props: Props) {
           <TabsTrigger value="highlights">Highlights</TabsTrigger>
         </TabsList>
         <TabsContent value="stories">
-          <Suspense fallback={<div>Loading stories...</div>}>
+          <Suspense fallback={<StoriesPlaceholder />}>
             <Stories username={username} />
           </Suspense>
         </TabsContent>
         <TabsContent value="highlights">
-          <Suspense fallback={<div>Loading highlights...</div>}>
+          <Suspense fallback={<StoriesPlaceholder />}>
             <Highlights
               username={username}
               userId={userId}
