@@ -32,6 +32,7 @@ const Story = (props: Props) => {
       <div className="w-[300px] relative cursor-pointer">
         <AspectRatio ratio={9 / 16}>
           <Image
+            unoptimized
             src={image}
             fill={true}
             alt="Story"

@@ -38,6 +38,7 @@ const ImageDialog = (props: Props) => {
             </video>
           ) : (
             <Image
+              unoptimized
               src={src}
               alt="Story"
               className="w-full object-cover"
