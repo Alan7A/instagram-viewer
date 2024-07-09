@@ -6,8 +6,9 @@ import {
 import Stories from "@/components/Stories";
 import Title from "@/components/Title";
 import UserInfo from "@/components/UserInfo";
+import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Info } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -26,7 +27,7 @@ export default async function UserPage(props: Props) {
   const { userId, highlight } = props.searchParams;
 
   return (
-    <main className="flex flex-col gap-4">
+    <main className="flex flex-col gap-4 min-h-dvh py-8 px-4">
       <div className="flex gap-4 items-center">
         <Link href="/">
           <ArrowLeft color="#bb9af7" />
@@ -58,6 +59,12 @@ export default async function UserPage(props: Props) {
           </Suspense>
         </TabsContent>
       </Tabs>
+      <Alert className="max-w-fit flex items-center mx-auto mt-auto">
+        <Info className="h-4 w-4" />
+        <AlertTitle>
+          Right click or long press an image/video to download
+        </AlertTitle>
+      </Alert>
     </main>
   );
 }

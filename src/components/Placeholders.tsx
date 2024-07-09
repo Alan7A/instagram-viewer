@@ -17,9 +17,9 @@ export const UserInfoPlaceholder = () => {
 export const StoriesPlaceholder = () => {
   return (
     <div className="flex flex-wrap gap-4 mt-2">
-      <Skeleton className="w-[300px] h-[532px] rounded-md" />
-      <Skeleton className="w-[300px] h-[532px] rounded-md" />
-      <Skeleton className="w-[300px] h-[532px] rounded-md" />
+      <Skeleton className="w-[300px] h-[532px] rounded-md mx-auto sm:mx-0" />
+      <Skeleton className="w-[300px] h-[532px] rounded-md mx-auto sm:mx-0" />
+      <Skeleton className="w-[300px] h-[532px] rounded-md mx-auto sm:mx-0" />
     </div>
   );
 };

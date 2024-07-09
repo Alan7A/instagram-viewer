@@ -3,8 +3,7 @@ import { Story as StoryType } from "@/types/Stories.types";
 import React, { useState } from "react";
 import { AspectRatio } from "./ui/aspect-ratio";
 import Image from "next/image";
-import { Button } from "./ui/button";
-import { Download, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import { getRelativeTimeString } from "@/lib/utils";
 import { getImageUrl, getVideoUrl, toBase64 } from "@/lib/utils";
 import ImageDialog from "./ImageDialog";
@@ -45,9 +44,6 @@ const Story = (props: Props) => {
       </div>
       <div className="flex justify-between items-center">
         <p>{relativeTime}</p>
-        <Button size="icon" variant="ghost">
-          <Download color="#bb9af7" />
-        </Button>
       </div>
       <ImageDialog
         isOpen={isOpen}
