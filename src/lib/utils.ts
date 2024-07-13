@@ -12,8 +12,22 @@ export function getRelativeTimeString(dateInSeconds: number) {
   const seconds = Math.floor(diff / 1000);
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(months / 12);
   const remainingMinutes = minutes % 60; // Get the remaining minutes after calculating hours
 
+  if (years > 0) {
+    const remainingMonths = months % 12;
+    return `${years} year${years > 1 ? "s" : ""} and ${remainingMonths} month${remainingMonths > 1 ? "s" : ""} ago`;
+  }
+  if (months > 0) {
+    const remainingDays = days % 30;
+    return `${months} month${months > 1 ? "s" : ""} and ${remainingDays} day${remainingDays > 1 ? "s" : ""} ago`;
+  }
+  if (days > 1) {
+    return `${days} day${days > 1 ? "s" : ""} ago`;
+  }
   if (hours > 0) {
     // Handle cases where both hours and minutes should be shown
     return `${hours} hour${hours > 1 ? "s" : ""} and ${remainingMinutes} minute${remainingMinutes !== 1 ? "s" : ""} ago`;
@@ -22,35 +36,6 @@ export function getRelativeTimeString(dateInSeconds: number) {
     return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
   } else {
     // Handle cases where only seconds should be shown
-    return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
-  }
-}
-
-export function getBigRelativeTimeString(dateInSeconds: number) {
-  const date = new Date(dateInSeconds * 1000);
-  const now = new Date();
-  const diff = now.getTime() - date.getTime();
-  const seconds = Math.floor(diff / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-  const weeks = Math.floor(days / 7);
-  const months = Math.floor(weeks / 4);
-  const years = Math.floor(months / 12);
-
-  if (years > 0) {
-    return `${years} year${years > 1 ? "s" : ""} ago`;
-  } else if (months > 0) {
-    return `${months} month${months > 1 ? "s" : ""} ago`;
-  } else if (weeks > 0) {
-    return `${weeks} week${weeks > 1 ? "s" : ""} ago`;
-  } else if (days > 0) {
-    return `${days} day${days > 1 ? "s" : ""} ago`;
-  } else if (hours > 0) {
-    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
-  } else if (minutes > 0) {
-    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
-  } else {
     return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
   }
 }

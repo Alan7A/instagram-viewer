@@ -46,7 +46,7 @@ const UserInfo = async (props: Props) => {
   return (
     <div className="flex gap-4">
       <Avatar className="w-[80px] h-[80px]">
-        <AvatarImage src={image} alt="profile pic" />
+        <AvatarImage src={"image"} alt="profile pic" />
         <AvatarFallback className="text-black">{full_name[0]}</AvatarFallback>
       </Avatar>
       <div className="flex-1 flex flex-col gap-2">
