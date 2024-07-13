@@ -1,8 +1,9 @@
 {
   "name": "Instagram Viewer",
   "short_name": "InstaViewer",
+  "description": "Watch Instagram stories and highlights anonymously",
   "theme_color": "#7aa2f7",
-  "background_color": "#1a1b26",
+  "background_color": "#24283b",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
@@ -48,13 +49,7 @@
       "type": "image/png"
     },
     {
-      "src": "icons/icon-monochrome.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "monochrome"
-    },
-    {
-      "src": "icons/icon-monochrome.png",
+      "src": "icons/maskable-icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
