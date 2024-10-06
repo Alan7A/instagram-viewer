@@ -3,7 +3,7 @@ import { Skeleton } from "./ui/skeleton";
 
 export const UserInfoPlaceholder = () => {
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex items-center space-x-4 py-8 px-4">
       <Skeleton className="h-14 w-14 rounded-full" />
       <div className="space-y-2">
         <Skeleton className="h-4 w-[250px]" />
