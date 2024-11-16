@@ -53,7 +53,7 @@ export function getImageUrl(options: GetMediaUrlOptions) {
   const { signature, expires } = url_signature;
 
   const encodedUri = encodeURIComponent(url);
-  return `https://media.anonyig.com/get?uri=${encodedUri}&__sig=${signature}&__expires=${expires}`;
+  return `https://media.storiesig.info/get?uri=${encodedUri}&__sig=${signature}&__expires=${expires}`;
 }
 
 export function getVideoUrl(options: GetMediaUrlOptions | null) {
@@ -64,7 +64,7 @@ export function getVideoUrl(options: GetMediaUrlOptions | null) {
   const referer = "https%3A%2F%2Fwww.instagram.com%2F";
 
   const encodedUri = encodeURIComponent(url);
-  return `https://media.anonyig.com/get?uri=${encodedUri}&filename=${filename}&__sig=${signature}&__expires=${expires}&referer=${referer}`;
+  return `https://media.storiesig.info/get?uri=${encodedUri}&filename=${filename}&__sig=${signature}&__expires=${expires}&referer=${referer}`;
 }
 
 export const toBase64 = (str: string) =>

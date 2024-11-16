@@ -14,7 +14,7 @@ interface Props {
 
 async function getUserHighlights(userId: string) {
   const res = await fetch(
-    `https://anonyig.com/api/ig/highlights/${userId}`,
+    `https://api-ig.storiesig.info/api/highlights/${userId}`,
     { next: { revalidate: 259200 } } // 3 days
   );
   if (!res.ok) {
@@ -29,7 +29,7 @@ async function getHighlightStories(highlightId: string | undefined) {
     return [];
   }
   const res = await fetch(
-    `https://anonyig.com/api/ig/highlightStories/${highlightId}`,
+    `https://api-ig.storiesig.info/api/highlightStories/${highlightId}`,
     { cache: "no-store" }
   );
   if (!res.ok) {

@@ -22,4 +22,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Shadcn UI](https://shadcn.com/ui)
 - [Vercel](https://vercel.com/)
-- [Anonyig API](https://anonyig.com/api)
+- [StoriesIG API](https://storiesig.info/en/)
