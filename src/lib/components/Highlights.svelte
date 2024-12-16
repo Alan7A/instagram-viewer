@@ -3,6 +3,7 @@
   import Story from "./Story.svelte";
   import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
   import Info from "lucide-svelte/icons/info";
+  import Spinner from "lucide-svelte/icons/loader-circle";
   import { Alert, AlertTitle } from "$lib/components/ui/alert";
 
   let { highlights } = $props();
@@ -19,8 +20,8 @@
       method: "POST",
       body: JSON.stringify({ highlightsId: id }),
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     });
 
     if (!res.ok) {
@@ -29,7 +30,6 @@
     }
 
     const data = (await res.json()) as { stories: Story[] };
-    console.log({ data });
 
     return data.stories;
   };
@@ -39,14 +39,14 @@
   {#if !highlights || highlights.length === 0}
     <p class="text-center text-xl p-8">No highlights found</p>
   {:else}
-    <div class="flex gap-7 overflow-x-auto py-2 px-1 overflow">
+    <div class="flex gap-7 overflow-x-auto pt-2 px-1 overflow">
       {#each highlights as { id, title, thumbnail }}
         <button
           onclick={() => handleClick(id)}
           class="flex flex-col gap-1 items-center flex-shrink-0"
         >
           <Avatar
-            class={`w-[50px] h-[50px] ${id === selectedId ? "ring-4 ring-secondary" : ""}`}
+            class={`w-[50px] h-[50px] ${id === selectedId ? "ring-4 ring-primary" : ""}`}
           >
             <AvatarImage src={thumbnail} alt={`${title} cover`} />
             <AvatarFallback class="text-black">
@@ -62,7 +62,9 @@
 
     {#if selectedId}
       {#await highlightsPromise}
-        <p>Loading...</p>
+        <div class="flex justify-center items-center">
+          <Spinner class="animate-spin h-12 w-12 mt-10" />
+        </div>
       {:then highlightsData}
         <Stories stories={highlightsData} />
         <Alert class="max-w-fit flex items-center mx-auto mt-8">

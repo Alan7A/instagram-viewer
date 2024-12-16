@@ -27,6 +27,7 @@
 	},
 	"dependencies": {
 		"@tailwindcss/aspect-ratio": "^0.4.2",
+		"gsap": "^3.12.5",
 		"lucide-svelte": "^0.468.0"
 	}
 }

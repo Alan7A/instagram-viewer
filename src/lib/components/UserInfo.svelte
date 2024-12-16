@@ -1,5 +1,4 @@
 <script lang="ts">
-  import ImageDialog from "./ImageDialog.svelte";
   import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
   import * as Dialog from "$lib/components/ui/dialog/index.js";
 

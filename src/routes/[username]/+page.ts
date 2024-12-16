@@ -4,7 +4,6 @@ import { error } from "@sveltejs/kit";
 
 export const load: PageLoad = async ({ params, fetch }) => {
   const { username } = params;
-  console.log({ username });
 
   if (!username) {
     error(400, "Username is required");
@@ -15,8 +14,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
       method: "POST",
       body: JSON.stringify({ username }),
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     });
 
     if (!res.ok) {
@@ -36,7 +35,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     // Comprehensive error handling
     console.error("Failed to fetch user data:", err);
     error(500, {
-      message: "Failed to load user data",
+      message: "Failed to load user data"
     });
   }
 };

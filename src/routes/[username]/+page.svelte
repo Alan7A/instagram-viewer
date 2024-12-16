@@ -5,10 +5,17 @@
   import * as Tabs from "$lib/components/ui/tabs/index.js";
   import Stories from "$lib/components/Stories.svelte";
   import Highlights from "$lib/components/Highlights.svelte";
+  import { isFetching } from "$lib/globalState.svelte";
 
   let { data }: { data: PageData } = $props();
   const { user_info, stories, highlights } = data;
   const { is_private } = user_info;
+
+  $effect(() => {
+    if (isFetching.user) {
+      isFetching.user = false;
+    }
+  });
 </script>
 
 <main class="flex flex-col gap-4">

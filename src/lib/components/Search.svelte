@@ -5,13 +5,13 @@
   import Search from "lucide-svelte/icons/search";
   import LoaderCircle from "lucide-svelte/icons/loader-circle";
   import { sanitizeUsername, saveUsernameInLocalStorage } from "$lib/utils";
+  import { isFetching } from "$lib/globalState.svelte";
 
   let username = $state("");
-  let isLoading = $state(false);
 
   async function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
-    isLoading = true;
+    isFetching.user = true;
     const sanitizedUsername = sanitizeUsername(username);
 
     if (!sanitizedUsername) {
@@ -34,10 +34,10 @@
     required
     autofocus
     autocomplete="off"
-    disabled={isLoading}
+    disabled={isFetching.user}
   />
-  <Button type="submit" size="icon" disabled={isLoading}>
-    {#if isLoading}
+  <Button type="submit" size="icon" disabled={isFetching.user}>
+    {#if isFetching.user}
       <LoaderCircle class="animate-spin" />
     {:else}
       <Search />

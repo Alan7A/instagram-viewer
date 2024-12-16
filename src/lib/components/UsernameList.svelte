@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Username } from "$lib/types";
+  import { isFetching } from "$lib/globalState.svelte";
   import X from "lucide-svelte/icons/x";
 
   const usernamesLocalStorage: Username[] =
@@ -20,6 +21,7 @@
   };
 
   const updateUsernameTimestamp = (username: string) => {
+    isFetching.user = true;
     const newUsernameList = usernames.map((user: { username: string }) => {
       if (user.username === username) {
         return { ...user, timestamp: new Date().getTime() };
@@ -30,7 +32,7 @@
   };
 </script>
 
-{#if !usernames.length}
+{#if usernames.length === 0}
   <p class="text-center text-gray-400 text-lg mt-12">Search a username</p>
 {:else}
   <div class="flex flex-col gap-4">
