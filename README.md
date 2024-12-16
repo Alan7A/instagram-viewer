@@ -1,38 +1,25 @@
-# sv
+## Instagram Viewer
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+This is a simple Instagram story viewer that allows you to search for a user and view their profile picture, stories and highlights. It uses an API to fetch the data. If the app stops working, it is likely that the API has been taken down.
 
-## Creating a project
+The app can also be installed as a PWA on your phone or tablet.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Getting Started
 
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+First, run the development server:
 
 ```bash
-npm run dev
+bun install
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+bun dev
 ```
 
-## Building
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
 
-To create a production version of your app:
+## Tech Stack
 
-```bash
-npm run build
-```
+- [SvelteKit 5](https://svelte.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn-svelte](https://www.shadcn-svelte.com/)
+- [Vercel](https://vercel.com/)
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
