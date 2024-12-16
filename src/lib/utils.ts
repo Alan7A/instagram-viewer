@@ -1,9 +1,37 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { cubicOut } from "svelte/easing";
+import type { TransitionConfig } from "svelte/transition";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+export const sanitizeUsername = (username: string) => {
+  username = username.trim();
+  if (!username.includes("www.instagram.com/")) return username;
+
+  try {
+    // Crear un objeto URL para analizar la URL
+    const urlObj = new URL(username);
+
+    // Extraer la ruta de la URL
+    const pathname = urlObj.pathname;
+
+    // Dividir la ruta por "/" y obtener el primer segmento no vacío
+    const segments = pathname.split("/").filter((segment) => segment);
+
+    // El primer segmento de la ruta es el nombre de usuario
+    return segments[0] || null;
+  } catch (error) {
+    console.error("URL inválida:", error);
+    return null;
+  }
+};
+
+export const saveUsernameInLocalStorage = (username: string) => {
+  const timestamp = new Date().getTime();
+  const data = { username, timestamp };
+  const usernames = JSON.parse(localStorage.getItem("usernames") || "[]");
+  usernames.push(data);
+  localStorage.setItem("usernames", JSON.stringify(usernames));
+};
 
 export function getRelativeTimeString(dateInSeconds: number) {
   const date = new Date(dateInSeconds * 1000);
@@ -19,18 +47,24 @@ export function getRelativeTimeString(dateInSeconds: number) {
 
   if (years > 0) {
     const remainingMonths = months % 12;
-    return `${years} year${years > 1 ? "s" : ""} and ${remainingMonths} month${remainingMonths > 1 ? "s" : ""} ago`;
+    return `${years} year${years > 1 ? "s" : ""} and ${remainingMonths} month${
+      remainingMonths > 1 ? "s" : ""
+    } ago`;
   }
   if (months > 0) {
     const remainingDays = days % 30;
-    return `${months} month${months > 1 ? "s" : ""} and ${remainingDays} day${remainingDays > 1 ? "s" : ""} ago`;
+    return `${months} month${months > 1 ? "s" : ""} and ${remainingDays} day${
+      remainingDays > 1 ? "s" : ""
+    } ago`;
   }
   if (days > 1) {
     return `${days} day${days > 1 ? "s" : ""} ago`;
   }
   if (hours > 0) {
     // Handle cases where both hours and minutes should be shown
-    return `${hours} hour${hours > 1 ? "s" : ""} and ${remainingMinutes} minute${remainingMinutes !== 1 ? "s" : ""} ago`;
+    return `${hours} hour${
+      hours > 1 ? "s" : ""
+    } and ${remainingMinutes} minute${remainingMinutes !== 1 ? "s" : ""} ago`;
   } else if (minutes > 0) {
     // Handle cases where only minutes should be shown
     return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
@@ -40,34 +74,60 @@ export function getRelativeTimeString(dateInSeconds: number) {
   }
 }
 
-interface GetMediaUrlOptions {
-  url: string;
-  url_signature: {
-    signature: string;
-    expires: number;
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+type FlyAndScaleParams = {
+  y?: number;
+  x?: number;
+  start?: number;
+  duration?: number;
+};
+
+export const flyAndScale = (
+  node: Element,
+  params: FlyAndScaleParams = { y: -8, x: 0, start: 0.95, duration: 150 }
+): TransitionConfig => {
+  const style = getComputedStyle(node);
+  const transform = style.transform === "none" ? "" : style.transform;
+
+  const scaleConversion = (
+    valueA: number,
+    scaleA: [number, number],
+    scaleB: [number, number]
+  ) => {
+    const [minA, maxA] = scaleA;
+    const [minB, maxB] = scaleB;
+
+    const percentage = (valueA - minA) / (maxA - minA);
+    const valueB = percentage * (maxB - minB) + minB;
+
+    return valueB;
   };
-}
 
-export function getImageUrl(options: GetMediaUrlOptions) {
-  const { url, url_signature } = options;
-  const { signature, expires } = url_signature;
+  const styleToString = (
+    style: Record<string, number | string | undefined>
+  ): string => {
+    return Object.keys(style).reduce((str, key) => {
+      if (style[key] === undefined) return str;
+      return str + `${key}:${style[key]};`;
+    }, "");
+  };
 
-  const encodedUri = encodeURIComponent(url);
-  return `https://media.storiesig.info/get?uri=${encodedUri}&__sig=${signature}&__expires=${expires}`;
-}
+  return {
+    duration: params.duration ?? 200,
+    delay: 0,
+    css: (t) => {
+      const y = scaleConversion(t, [0, 1], [params.y ?? 5, 0]);
+      const x = scaleConversion(t, [0, 1], [params.x ?? 0, 0]);
+      const scale = scaleConversion(t, [0, 1], [params.start ?? 0.95, 1]);
 
-export function getVideoUrl(options: GetMediaUrlOptions | null) {
-  if (!options) return "";
-  const { url, url_signature } = options;
-  const { signature, expires } = url_signature;
-  const filename = url.split("?")[0].split("/").pop();
-  const referer = "https%3A%2F%2Fwww.instagram.com%2F";
-
-  const encodedUri = encodeURIComponent(url);
-  return `https://media.storiesig.info/get?uri=${encodedUri}&filename=${filename}&__sig=${signature}&__expires=${expires}&referer=${referer}`;
-}
-
-export const toBase64 = (str: string) =>
-  typeof window === "undefined"
-    ? Buffer.from(str).toString("base64")
-    : window.btoa(str);
+      return styleToString({
+        transform: `${transform} translate3d(${x}px, ${y}px, 0) scale(${scale})`,
+        opacity: t,
+      });
+    },
+    easing: cubicOut,
+  };
+};

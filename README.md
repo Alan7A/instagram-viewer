@@ -1,25 +1,38 @@
-## Instagram Viewer
+# sv
 
-This is a simple Instagram viewer that allows you to search for a user and view their stories and highlights. It uses the Anonyig API to fetch the data. If the app stops working, it is likely that the API has been taken down.
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-The app can also be installed as a PWA on your phone or tablet.
+## Creating a project
 
-## Getting Started
-
-First, run the development server:
+If you're seeing this, you've probably already done this step. Congrats!
 
 ```bash
-yarn install
+# create a new project in the current directory
+npx sv create
 
-yarn start
+# create a new project in my-app
+npx sv create my-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Developing
 
-## Tech Stack
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-- [Next.js 14](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Shadcn UI](https://shadcn.com/ui)
-- [Vercel](https://vercel.com/)
-- [StoriesIG API](https://storiesig.info/en/)
+```bash
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```bash
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
