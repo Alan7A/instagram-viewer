@@ -627,7 +627,7 @@
     grid-gap: 8px;
     position: absolute;
     left: 50%;
-    bottom: 40%;
+    top: 50%;
     user-select: none;
     transform: translateX(-50%);
   }
