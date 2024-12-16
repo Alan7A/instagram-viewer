@@ -32,8 +32,18 @@ export const load: PageLoad = async ({ params, fetch }) => {
 
     return data;
   } catch (err) {
-    // Comprehensive error handling
     console.error("Failed to fetch user data:", err);
+    if (typeof err === "object" && err && "status" in err && "body" in err) {
+      const { status = 500, body = "Failed to load user data" } = err;
+      if (typeof status === "number" && typeof body === "object" && body) {
+        if ("message" in body) {
+          const { message } = body;
+          if (typeof message === "string") {
+            error(status, { message });
+          }
+        }
+      }
+    }
     error(500, {
       message: "Failed to load user data"
     });
