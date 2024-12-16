@@ -1,6 +1,7 @@
 <script>
   import { Button } from "$lib/components/ui/button";
   import { page } from "$app/stores";
+  import { isFetching } from "$lib/globalState.svelte";
 
   const { status, error: err } = $page;
   let error = $derived.by(() => {
@@ -14,6 +15,12 @@
       message: err?.message || "An error occurred",
       description: "Something unexpected happened. Please try again ."
     };
+  });
+
+  $effect(() => {
+    if (isFetching.user) {
+      isFetching.user = false;
+    }
   });
 </script>
 
