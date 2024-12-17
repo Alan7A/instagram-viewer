@@ -28,6 +28,7 @@
 	},
 	"dependencies": {
 		"@tailwindcss/aspect-ratio": "^0.4.2",
+		"@vercel/analytics": "^1.4.1",
 		"gsap": "^3.12.5",
 		"lucide-svelte": "^0.468.0"
 	}

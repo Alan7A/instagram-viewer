@@ -1,7 +1,13 @@
 <script lang="ts">
+  import { dev } from "$app/environment";
+  import { injectAnalytics } from "@vercel/analytics/sveltekit";
   import { onMount } from "svelte";
   import "../app.css";
+
   let { children } = $props();
+
+  // Vercel Web Analytics
+  injectAnalytics({ mode: dev ? "development" : "production" });
 
   onMount(() => {
     if ("serviceWorker" in navigator) {
