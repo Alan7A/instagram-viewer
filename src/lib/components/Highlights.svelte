@@ -67,12 +67,6 @@
         </div>
       {:then highlightsData}
         <Stories stories={highlightsData} />
-        <Alert class="max-w-fit flex items-center mx-auto mt-8">
-          <Info class="h-4 w-4" />
-          <AlertTitle>
-            Right click or long press an image/video to download
-          </AlertTitle>
-        </Alert>
       {:catch error}
         <p>Error: {error.message}</p>
       {/await}
