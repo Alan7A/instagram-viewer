@@ -26,8 +26,10 @@
 
 <div class="flex flex-col items-center justify-center">
   <div class="text-center">
-    <h1 class="text-3xl font-bold text-primary">{error.message}</h1>
-    <p class="text-lg mb-8 mt-4">{error.description}</p>
+    <!-- <h1 class="text-3xl font-bold text-primary">{error.message}</h1> -->
+    <h1 class="text-3xl font-bold text-primary">Unfortunately, the API is down 😿</h1>
+    <!-- <p class="text-lg mb-8 mt-4">{error.description}</p> -->
+    <p class="text-lg mb-8 mt-4">Try again in a few days or weeks</p>
     <div class="space-x-4">
       <a href="/">
         <Button class="bg-primary hover:bg-primary/8 text-white">
